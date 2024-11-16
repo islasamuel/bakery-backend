@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as process from 'node:process';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -10,6 +10,13 @@ async function bootstrap() {
   const logger = new Logger('main.ts');
 
   const app_port = process.env.APP_PORT || 6200;
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      //forbidNonWhitelisted: true,
+    }),
+  );
 
   logger.verbose(`===========================================`);
   logger.verbose(`APP STARTED`);

@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Represents a unit in the catalog of units."""
+type Unit {
+  """Unique identifier of the unit."""
+  id: Int!
+
+  """Description of the unit."""
+  description: String!
+}
+
+type Query {
+  units(offset: Int = 0, limit: Int = 10, search: String): [Unit!]!
+}
+
+type Mutation {
+  create(createUnitInput: CreateUnitInput!): Unit!
+  update(updateUnitInput: UpdateUnitInput!): Unit!
+  remove(id: Int!): Unit!
+}
+
+"""Input type for creating a unit"""
+input CreateUnitInput {
+  """Description of the unit"""
+  description: String!
+}
+
+"""
+Input type for updating an existing unit. Inherits properties from CreateUnitInput and makes them optional.
+"""
+input UpdateUnitInput {
+  """Description of the unit"""
+  description: String
+
+  """The unique identifier of the unit. Must be a positive integer."""
+  id: Int!
+}
