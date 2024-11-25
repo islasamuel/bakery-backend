@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 """Represents a unit in the catalog of units."""
-type Unit {
+type UnitType {
   """Unique identifier of the unit."""
   id: String!
 
@@ -12,17 +12,17 @@ type Unit {
 }
 
 type Query {
-  units(offset: Int = 0, limit: Int = 10, search: String): [Unit!]!
+  units(offset: Int = 0, limit: Int = 10, search: String): [UnitType!]!
 }
 
 type Mutation {
-  create(createUnitInput: CreateUnitInput!): Unit!
-  update(updateUnitInput: UpdateUnitInput!): Unit!
-  remove(id: Int!): Unit!
+  create(UnitInput: UnitInput!): UnitType!
+  update(UnitUpdate: UnitUpdate!): UnitType!
+  remove(id: Int!): UnitType!
 }
 
 """Input type for creating a unit"""
-input CreateUnitInput {
+input UnitInput {
   """Description of the unit"""
   description: String!
 }
@@ -30,7 +30,7 @@ input CreateUnitInput {
 """
 Input type for updating an existing unit. Inherits properties from CreateUnitInput and makes them optional.
 """
-input UpdateUnitInput {
+input UnitUpdate {
   """Description of the unit"""
   description: String
 

@@ -6,7 +6,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
  */
 @ObjectType({ description: 'Represents a unit in the catalog of units.' })
 @Entity({ name: 'cat_units' })
-export class Unit {
+export class UnitType {
   @Field(() => String, { description: 'Unique identifier of the unit.' })
   @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;

@@ -1,4 +1,4 @@
-import { CreateUnitInput } from './create-unit.input';
+import { UnitInput } from './unit.input';
 import { Field, InputType, Int, PartialType } from '@nestjs/graphql';
 import { IsNotEmpty, IsPositive, Min } from 'class-validator';
 
@@ -6,13 +6,13 @@ import { IsNotEmpty, IsPositive, Min } from 'class-validator';
  * Input type for updating an existing unit.
  * Inherits properties from CreateUnitInput and makes them optional.
  *
- * @extends PartialType<CreateUnitInput>
+ * @extends PartialType<UnitInput>
  */
 @InputType({
   description:
     'Input type for updating an existing unit. Inherits properties from CreateUnitInput and makes them optional.',
 })
-export class UpdateUnitInput extends PartialType(CreateUnitInput) {
+export class UnitUpdate extends PartialType(UnitInput) {
   @Field(() => Int, {
     description:
       'The unique identifier of the unit. Must be a positive integer.',

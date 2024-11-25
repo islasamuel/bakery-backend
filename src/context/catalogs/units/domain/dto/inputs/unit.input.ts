@@ -7,7 +7,7 @@ import { IsNotEmpty, MaxLength } from 'class-validator';
 @InputType({
   description: 'Input type for creating a unit',
 })
-export class CreateUnitInput {
+export class UnitInput {
   @Field(() => String, { description: 'Description of the unit' })
   @MaxLength(100, {
     message: 'Description must be at most 100 characters long',

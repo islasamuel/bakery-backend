@@ -1,7 +1,7 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Unit } from './infrastructure/entities/unit.entity';
-import { CreateUnitInput } from './domain/dto/inputs/create-unit.input';
-import { UpdateUnitInput } from './domain/dto/inputs/update-unit.input';
+import { UnitType } from './infrastructure/entities/unit.entity';
+import { UnitInput } from './domain/dto/inputs/unit.input';
+import { UnitUpdate } from './domain/dto/inputs/unit.update';
 import { PaginationArgs, SearchArgs } from '../../../common/dto/args';
 import { UnitsApplication } from './application/units.application';
 
@@ -12,21 +12,19 @@ import { UnitsApplication } from './application/units.application';
  * @class
  * @classdesc Integrates with UnitsApplication to perform CRUD operations on Units.
  */
-@Resolver(() => Unit)
+@Resolver(() => UnitType)
 export class UnitsResolver {
   constructor(private readonly application: UnitsApplication) {}
 
   /**
    * Creates a new Unit with the provided input data.
    *
-   * @param {CreateUnitInput} createUnitInput - The input data for creating a new Unit.
-   * @return {Promise<Unit>} - A promise that resolves to the newly created Unit.
+   * @param {UnitInput} createUnitInput - The input data for creating a new Unit.
+   * @return {Promise<UnitType>} - A promise that resolves to the newly created Unit.
    */
-  @Mutation(() => Unit)
-  async create(
-    @Args('createUnitInput') createUnitInput: CreateUnitInput,
-  ): Promise<Unit> {
-    return await this.application.create(createUnitInput);
+  @Mutation(() => UnitType)
+  async create(@Args('UnitInput') unitInput: UnitInput): Promise<UnitType> {
+    return await this.application.create(unitInput);
   }
 
   /**
@@ -34,37 +32,35 @@ export class UnitsResolver {
    *
    * @param {PaginationArgs} paginationArgs - The arguments for pagination, including page number and page size.
    * @param {SearchArgs} searchArgs - The arguments for searching, which may include filters or keywords.
-   * @return {Promise<Unit[]>} A promise that resolves to an array of units matching the specified criteria.
+   * @return {Promise<UnitType[]>} A promise that resolves to an array of units matching the specified criteria.
    */
-  @Query(() => [Unit], { name: 'units' })
+  @Query(() => [UnitType], { name: 'units' })
   async findPagination(
     @Args() paginationArgs: PaginationArgs,
     @Args() searchArgs: SearchArgs,
-  ): Promise<Unit[]> {
+  ): Promise<UnitType[]> {
     return await this.application.findPagination(paginationArgs, searchArgs);
   }
 
   /**
    * Updates an existing unit with the provided input data.
    *
-   * @param {UpdateUnitInput} updateUnitInput - The input data for updating the unit.
-   * @return {Promise<Unit>} A promise that resolves to the updated unit object.
+   * @param {UnitUpdate} unitUpdate - The input data for updating the unit.
+   * @return {Promise<UnitType>} A promise that resolves to the updated unit object.
    */
-  @Mutation(() => Unit)
-  async update(
-    @Args('updateUnitInput') updateUnitInput: UpdateUnitInput,
-  ): Promise<Unit> {
-    return await this.application.update(updateUnitInput);
+  @Mutation(() => UnitType)
+  async update(@Args('UnitUpdate') unitUpdate: UnitUpdate): Promise<UnitType> {
+    return await this.application.update(unitUpdate);
   }
 
   /**
    * Removes an entity based on the provided identifier.
    *
    * @param {string} id - The unique identifier of the entity to be removed.
-   * @return {Promise<Unit>} - A promise that resolves to a unit type indicating the completion of the removal operation.
+   * @return {Promise<UnitType>} - A promise that resolves to a unit type indicating the completion of the removal operation.
    */
-  @Mutation(() => Unit)
-  async remove(@Args('id', { type: () => Int }) id: string): Promise<Unit> {
+  @Mutation(() => UnitType)
+  async remove(@Args('id', { type: () => Int }) id: string): Promise<UnitType> {
     return await this.application.remove(id);
   }
 }

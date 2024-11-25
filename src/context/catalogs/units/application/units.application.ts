@@ -4,10 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { UnitsService } from '../infrastructure/units.service';
-import { CreateUnitInput } from '../domain/dto/inputs/create-unit.input';
-import { Unit } from '../infrastructure/entities/unit.entity';
+import { UnitInput } from '../domain/dto/inputs/unit.input';
+import { UnitType } from '../infrastructure/entities/unit.entity';
 import { PaginationArgs, SearchArgs } from '../../../../common/dto/args';
-import { UpdateUnitInput } from '../domain/dto/inputs/update-unit.input';
+import { UnitUpdate } from '../domain/dto/inputs/unit.update';
 
 @Injectable()
 export class UnitsApplication {
@@ -16,12 +16,12 @@ export class UnitsApplication {
   /**
    * Creates a new unit based on the provided data.
    *
-   * @param {CreateUnitInput} data - The input data to create a new unit.
-   * @return {Promise<Unit>} The newly created unit.
+   * @param {UnitInput} data - The input data to create a new unit.
+   * @return {Promise<UnitType>} The newly created unit.
    * @throws {BadRequestException} If the unit with the provided description already exists.
    */
-  async create(data: CreateUnitInput): Promise<Unit> {
-    const exist: Unit = await this.service.findByDescription(data.description);
+  async create(data: UnitInput): Promise<UnitType> {
+    const exist: UnitType = await this.service.findByDescription(data.description);
     if (exist) throw new BadRequestException('The infomation already exists');
     return await this.service.create(data);
   }
@@ -31,21 +31,21 @@ export class UnitsApplication {
    *
    * @param {PaginationArgs} paginationArgs - The arguments that specify the pagination details such as page number and page size.
    * @param {SearchArgs} searchArgs - The arguments that specify the search criteria and filters.
-   * @return {Promise<Unit[]>} A promise that resolves to an array of Unit objects representing the paginated results.
+   * @return {Promise<UnitType[]>} A promise that resolves to an array of Unit objects representing the paginated results.
    */
   async findPagination(
     paginationArgs: PaginationArgs,
     searchArgs: SearchArgs,
-  ): Promise<Unit[]> {
+  ): Promise<UnitType[]> {
     return await this.service.findPagination(paginationArgs, searchArgs);
   }
 
   /**
    * Updates an existing unit with the provided data.
    *
-   * @param {UpdateUnitInput} data - The input data containing update information for*/
-  async update(data: UpdateUnitInput): Promise<Unit> {
-    const exist: Unit = await this.service.findById(data.id);
+   * @param {UnitUpdate} data - The input data containing update information for*/
+  async update(data: UnitUpdate): Promise<UnitType> {
+    const exist: UnitType = await this.service.findById(data.id);
     if (!exist) throw new NotFoundException('Infomation not found');
     return await this.service.update(data);
   }
@@ -54,11 +54,11 @@ export class UnitsApplication {
    * Removes a unit identified by the given ID.
    *
    * @param {string} id - The ID of the unit to be removed.
-   * @return {Promise<Unit>} A promise that resolves to the removed unit.
+   * @return {Promise<UnitType>} A promise that resolves to the removed unit.
    * @throws {NotFoundException} If no unit with the given ID is found.
    */
-  async remove(id: string): Promise<Unit> {
-    const exist: Unit = await this.service.findById(id);
+  async remove(id: string): Promise<UnitType> {
+    const exist: UnitType = await this.service.findById(id);
     if (!exist) throw new NotFoundException('Infomation not found');
     return await this.service.remove(id);
   }
