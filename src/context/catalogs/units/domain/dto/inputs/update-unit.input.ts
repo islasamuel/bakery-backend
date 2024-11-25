@@ -26,5 +26,5 @@ export class UpdateUnitInput extends PartialType(CreateUnitInput) {
   @IsNotEmpty({
     message: 'The ID field cannot be empty.',
   })
-  id: number;
+  id: string;
 }

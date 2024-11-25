@@ -53,11 +53,11 @@ export class UnitsApplication {
   /**
    * Removes a unit identified by the given ID.
    *
-   * @param {number} id - The ID of the unit to be removed.
+   * @param {string} id - The ID of the unit to be removed.
    * @return {Promise<Unit>} A promise that resolves to the removed unit.
    * @throws {NotFoundException} If no unit with the given ID is found.
    */
-  async remove(id: number): Promise<Unit> {
+  async remove(id: string): Promise<Unit> {
     const exist: Unit = await this.service.findById(id);
     if (!exist) throw new NotFoundException('Infomation not found');
     return await this.service.remove(id);

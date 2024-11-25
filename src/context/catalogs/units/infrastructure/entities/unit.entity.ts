@@ -1,5 +1,5 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 /**
  * Represents a unit in the catalog of units.
@@ -8,7 +8,7 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 @Entity({ name: 'cat_units' })
 export class Unit {
   @Field(() => String, { description: 'Unique identifier of the unit.' })
-  @PrimaryColumn({ type: 'uuid', name: 'id' })
+  @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;
 
   @Field(() => String, { description: 'Description of the unit.' })

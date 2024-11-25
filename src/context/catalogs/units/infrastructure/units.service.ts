@@ -70,10 +70,10 @@ export class UnitsService {
   /**
    * Finds a unit by its unique identifier.
    *
-   * @param {number} id - The unique identifier of the unit to find.
+   * @param {string} id - The unique identifier of the unit to find.
    * @return {Promise<Unit>} A promise that resolves to the found unit.
    */
-  async findById(id: number): Promise<Unit> {
+  async findById(id: string): Promise<Unit> {
     return await this.repository.findOne({
       where: { id },
     });
@@ -108,7 +108,7 @@ export class UnitsService {
    * @param {number} id - The identifier of the entity to be deactivated.
    * @return {Promise<Unit>} A promise that resolves to the updated entity.
    */
-  async remove(id: number): Promise<Unit> {
+  async remove(id: string): Promise<Unit> {
     const data: Unit = await this.findById(id);
     data.active = false;
     return await this.update(data);

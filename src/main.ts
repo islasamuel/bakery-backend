@@ -21,6 +21,7 @@ async function bootstrap() {
   logger.verbose(`===========================================`);
   logger.verbose(`APP STARTED`);
   logger.verbose(`APP PORT: ${app_port}`);
+  logger.verbose(`APP LOCAL: http://localhost:6200/graphql`);
   logger.verbose(`===========================================`);
 
   await app.listen(app_port);

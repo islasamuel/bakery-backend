@@ -5,7 +5,7 @@
 """Represents a unit in the catalog of units."""
 type Unit {
   """Unique identifier of the unit."""
-  id: Int!
+  id: String!
 
   """Description of the unit."""
   description: String!

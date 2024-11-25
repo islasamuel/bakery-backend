@@ -60,11 +60,11 @@ export class UnitsResolver {
   /**
    * Removes an entity based on the provided identifier.
    *
-   * @param {number} id - The unique identifier of the entity to be removed.
+   * @param {string} id - The unique identifier of the entity to be removed.
    * @return {Promise<Unit>} - A promise that resolves to a unit type indicating the completion of the removal operation.
    */
   @Mutation(() => Unit)
-  async remove(@Args('id', { type: () => Int }) id: number): Promise<Unit> {
+  async remove(@Args('id', { type: () => Int }) id: string): Promise<Unit> {
     return await this.application.remove(id);
   }
 }
